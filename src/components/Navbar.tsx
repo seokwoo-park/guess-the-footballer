@@ -1,4 +1,4 @@
-import { ThemeSwitcher } from "@/app/components/ThemeSwitcher";
+import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import Link from "next/link";
 import React from "react";
 
@@ -6,7 +6,7 @@ type Props = {};
 
 const Navbar = (props: Props) => {
   return (
-    <nav className="border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+    <nav className="bg-transparent border border-b-gray-700">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link
           href="/"
