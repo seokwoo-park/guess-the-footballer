@@ -1,14 +1,5 @@
 "use client";
 
-import { Button, buttonVariants } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { AVAILABLE_LEAGUES_TO_START } from "@/constants/home";
 import Image from "next/image";
 import Link from "next/link";
@@ -39,10 +30,10 @@ const Home = (props: Props) => {
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
-        {AVAILABLE_LEAGUES_TO_START.map(({ league, image, href }) => (
+        {AVAILABLE_LEAGUES_TO_START.map(({ league, image, path }) => (
           <Link
             key={league}
-            href={href}
+            href={`/play/${path}`}
             className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
           >
             <Image src={image} alt={league} className="rounded-t-lg" />
@@ -54,15 +45,6 @@ const Home = (props: Props) => {
                 Here are the biggest enterprise technology acquisitions of 2021
                 so far, in reverse chronological order.
               </p>
-              <Link
-                href={href}
-                className={`${buttonVariants({
-                  variant: "outline",
-                  className: "bg-green-600 text-lg",
-                })} w-full`}
-              >
-                Select
-              </Link>
             </div>
           </Link>
         ))}
