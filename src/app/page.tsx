@@ -30,11 +30,11 @@ const Home = (props: Props) => {
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
-        {AVAILABLE_LEAGUES_TO_START.map(({ league, image, path }) => (
+        {AVAILABLE_LEAGUES_TO_START.map(({ league, image, id }) => (
           <Link
             key={league}
-            href={`/play/${path}`}
-            className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+            href={`/leagues/${id}`}
+            className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-lg shadow-gray-300 dark:shadow-gray-600 dark:bg-gray-800 dark:border-gray-700 hover:scale-105 hover:shadow-red-800 duration-300"
           >
             <Image src={image} alt={league} className="rounded-t-lg" />
             <div className="flex flex-col gap-2 my-4 p-4">

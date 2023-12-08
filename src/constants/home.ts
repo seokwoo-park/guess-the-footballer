@@ -6,16 +6,16 @@ export const AVAILABLE_LEAGUES_TO_START = [
   {
     league: "English Premier League",
     image: epl_logo_image,
-    path: "epl",
+    id: 1,
   },
   {
     league: "Bundesliga",
     image: bundesliga_logo_image,
-    path: "bundesliga",
+    id: 2,
   },
   {
     league: "LaLiga",
     image: laLiga_logo_image,
-    path: "laLiga",
+    id: 3,
   },
 ];
