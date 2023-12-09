@@ -1,5 +1,6 @@
 "use client";
 
+import LeagueSelectionCard from "@/components/LeagueSelectionCard";
 import { AVAILABLE_LEAGUES_TO_START } from "@/constants/home";
 import Image from "next/image";
 import Link from "next/link";
@@ -29,24 +30,9 @@ const Home = (props: Props) => {
           necessitatibus. Hic, similique?
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
-        {AVAILABLE_LEAGUES_TO_START.map(({ league, image, id }) => (
-          <Link
-            key={league}
-            href={`/leagues/${id}`}
-            className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-lg shadow-gray-300 dark:shadow-gray-600 dark:bg-gray-800 dark:border-gray-700 hover:scale-105 hover:shadow-red-800 duration-300"
-          >
-            <Image src={image} alt={league} className="rounded-t-lg" />
-            <div className="flex flex-col gap-2 my-4 p-4">
-              <h5 className="mb-2 md:h-16 lg:h-auto  text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                {league}
-              </h5>
-              <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                Here are the biggest enterprise technology acquisitions of 2021
-                so far, in reverse chronological order.
-              </p>
-            </div>
-          </Link>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+        {AVAILABLE_LEAGUES_TO_START.map((props) => (
+          <LeagueSelectionCard key={props.id} {...props} />
         ))}
       </div>
     </main>
