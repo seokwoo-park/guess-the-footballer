@@ -1,4 +1,5 @@
 import { AVAILABLE_LEAGUES_TO_START } from "@/constants/home";
+import { fetchLeague } from "@/utils/fetchers";
 import axios from "axios";
 import React from "react";
 
@@ -9,10 +10,9 @@ export async function generateStaticParams() {
 }
 
 const PlayGuess = async ({ params }: { params: { leagueId: string } }) => {
-  const { data } = await axios.get("http://localhost:3000/api");
-  console.log(data);
+  const data = await fetchLeague(params.leagueId);
 
-  return <h1>{data?.title}</h1>;
+  return <h1>{params.leagueId}</h1>;
 };
 
 export default PlayGuess;
