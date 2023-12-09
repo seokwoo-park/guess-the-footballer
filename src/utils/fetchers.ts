@@ -3,8 +3,12 @@ import { notFound } from "next/navigation";
 
 export const fetchLeague = async (id: string) => {
   const { status, data } = await axios.get(
-    `http://localhost:3000/api/leagues?leagueId=${id}`
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/leagues?leagueId=${id}`
   );
+
+  if (status === 500) {
+    return location.reload();
+  }
 
   if (status !== 200) {
     return notFound();

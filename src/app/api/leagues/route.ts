@@ -1,7 +1,7 @@
 import { AVAILABLE_LEAGUES_TO_START } from "@/constants/home";
 import { getRandomNumber } from "@/utils/numbers";
-import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
+import axios from "axios";
 
 export async function GET(request: NextRequest) {
   const url = new URL(request.url);
@@ -11,10 +11,11 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ status: 400, message: "League ID is required" });
   }
 
-  const isValidLeagueToStart = AVAILABLE_LEAGUES_TO_START.some(
+  const leagueToStart = AVAILABLE_LEAGUES_TO_START.find(
     ({ id }) => id === +leagueId
   );
-  if (!isValidLeagueToStart) {
+
+  if (!leagueToStart) {
     return NextResponse.json({
       status: 400,
       message: "Invalid league ID",
@@ -22,6 +23,9 @@ export async function GET(request: NextRequest) {
   }
 
   const randomPageNumber = getRandomNumber(1, 30);
+  const firstSeasonElement = leagueToStart.availableSeason[0];
+  const latestSeasonElement = leagueToStart.availableSeason.at(-1)!;
+  const randomSeason = getRandomNumber(firstSeasonElement, latestSeasonElement);
 
   const API_ENDPOINT = "https://api-football-v1.p.rapidapi.com/v3/players";
 
@@ -31,15 +35,13 @@ export async function GET(request: NextRequest) {
     params: {
       league: leagueId,
       page: randomPageNumber,
-      season: "2023",
+      season: randomSeason,
     },
     headers: {
       "X-RapidAPI-Key": process.env.FOOTBALL_API_KEY,
       "X-RapidAPI-Host": process.env.FOOTBALL_API_HOST,
     },
   };
-
-  const axios = require("axios");
 
   try {
     const res = await axios.request(options);
