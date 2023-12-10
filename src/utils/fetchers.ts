@@ -1,7 +1,10 @@
+import { PlayerDataType } from "@/shared/types";
 import axios from "axios";
 import { notFound } from "next/navigation";
 
-export const fetchLeague = async (id: string) => {
+export const fetchLeaguePlayers = async (
+  id: string
+): Promise<void | PlayerDataType[]> => {
   const { status, data } = await axios.get(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/leagues?leagueId=${id}`
   );
@@ -14,5 +17,5 @@ export const fetchLeague = async (id: string) => {
     return notFound();
   }
 
-  return data;
+  return data?.data;
 };

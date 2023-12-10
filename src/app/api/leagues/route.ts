@@ -45,8 +45,7 @@ export async function GET(request: NextRequest) {
 
   try {
     const res = await axios.request(options);
-    console.log(res.data);
-    return NextResponse.json({ status: 201, data: res.data });
+    return NextResponse.json({ status: 201, data: res.data.response });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ status: 500 });
