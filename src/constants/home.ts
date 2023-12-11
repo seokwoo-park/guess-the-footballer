@@ -1,21 +1,69 @@
 import epl_logo_image from "@/assets/epl_logo.jpg";
 import bundesliga_logo_image from "@/assets/bundesliga_logo.jpg";
 import laLiga_logo_image from "@/assets/laLiga_logo.jpg";
+import ligue1_logo_image from "@/assets/ligue1_logo.jpg";
+import serieA_logo_image from "@/assets/serieA_logo.jpg";
+import mls_logo_image from "@/assets/mls_logo.jpg";
+import { AvailableLeaguesType } from "@/shared/types";
 
-export const AVAILABLE_LEAGUES_TO_START = [
+export const AVAILABLE_LEAGUES_TO_START: AvailableLeaguesType[] = [
   {
-    league: "English Premier League",
+    country: "England",
+    league: "Premier League",
     image: epl_logo_image,
-    path: "epl",
+    availableSeason: [
+      2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021,
+      2022, 2023,
+    ],
+    id: 39,
   },
   {
+    country: "Germany",
     league: "Bundesliga",
     image: bundesliga_logo_image,
-    path: "bundesliga",
+    id: 78,
+    availableSeason: [
+      2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021,
+      2022, 2023,
+    ],
   },
   {
+    country: "Spain",
     league: "LaLiga",
     image: laLiga_logo_image,
-    path: "laLiga",
+    id: 140,
+    availableSeason: [
+      2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021,
+      2022, 2023,
+    ],
+  },
+  {
+    country: "France",
+    league: "Ligue 1",
+    image: ligue1_logo_image,
+    id: 61,
+    availableSeason: [
+      2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021,
+      2022, 2023,
+    ],
+  },
+  {
+    country: "Italy",
+    league: "Serie A",
+    image: serieA_logo_image,
+    id: 135,
+    availableSeason: [
+      2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021,
+      2022, 2023,
+    ],
+  },
+  {
+    country: "USA",
+    league: "Major League Soccer",
+    image: mls_logo_image,
+    id: 253,
+    availableSeason: [
+      2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023,
+    ],
   },
 ];
