@@ -40,3 +40,9 @@ export type PlayerDataType = {
 
   statics: PlayerStaticType[];
 };
+
+export type FetchLeaguePlayersResponseType = {
+  data: PlayerDataType[];
+  season: number;
+  page: number;
+};

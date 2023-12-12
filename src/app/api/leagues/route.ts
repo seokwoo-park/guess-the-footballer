@@ -7,12 +7,22 @@ export async function GET(request: NextRequest) {
   const url = new URL(request.url);
 
   const leagueId = url.searchParams.get("leagueId");
+  const season = url.searchParams.get("season");
+  const page = url.searchParams.get("page");
+
   if (!leagueId) {
     return NextResponse.json({ status: 400, message: "League ID is required" });
   }
+  if (!season) {
+    return NextResponse.json({ status: 400, message: "Season is required" });
+  }
+  if (!page) {
+    return NextResponse.json({ status: 400, message: "Page is required" });
+  }
 
   const leagueToStart = AVAILABLE_LEAGUES_TO_START.find(
-    ({ id }) => id === +leagueId
+    ({ id, availableSeason }) =>
+      id === +leagueId && availableSeason.includes(+season)
   );
 
   if (!leagueToStart) {
@@ -22,11 +32,6 @@ export async function GET(request: NextRequest) {
     });
   }
 
-  const randomPageNumber = getRandomNumber(1, 30);
-  const firstSeasonElement = leagueToStart.availableSeason[0];
-  const latestSeasonElement = leagueToStart.availableSeason.at(-1)!;
-  const randomSeason = getRandomNumber(firstSeasonElement, latestSeasonElement);
-
   const API_ENDPOINT = "https://api-football-v1.p.rapidapi.com/v3/players";
 
   const options = {
@@ -34,8 +39,10 @@ export async function GET(request: NextRequest) {
     url: API_ENDPOINT,
     params: {
       league: leagueId,
-      page: randomPageNumber,
-      season: randomSeason,
+      page,
+      season,
+      // page: randomPageNumber,
+      // season: randomSeason,
     },
     headers: {
       "X-RapidAPI-Key": process.env.FOOTBALL_API_KEY,

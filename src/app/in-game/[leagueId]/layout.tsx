@@ -1,5 +1,5 @@
 import { AVAILABLE_LEAGUES_TO_START } from "@/constants/home";
-import { fetchLeaguePlayers } from "@/utils/fetchers";
+import { InGameContextProvider } from "@/context/InGameContext";
 
 export async function generateStaticParams() {
   return AVAILABLE_LEAGUES_TO_START.map(({ id }) => ({
@@ -14,9 +14,11 @@ const InGameLayout = async ({
   children: React.ReactNode;
   params: { leagueId: string };
 }) => {
-  const players = await fetchLeaguePlayers(params.leagueId);
-
-  return <>{children}</>;
+  return (
+    <InGameContextProvider leagueId={params.leagueId}>
+      {children}
+    </InGameContextProvider>
+  );
 };
 
 export default InGameLayout;
