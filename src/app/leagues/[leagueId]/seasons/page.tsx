@@ -2,8 +2,8 @@ import React from "react";
 
 type Props = {};
 
-const InGame = async (props: Props) => {
-  return <div>PlayGuess</div>;
+const InGame = (props: Props) => {
+  return <div>Season</div>;
 };
 
 export default InGame;

@@ -6,6 +6,6 @@ export type AvailableLeaguesType = {
   country: string;
   league: string;
   image: StaticImageData;
-  availableSeason: number[];
+  availableSeasons: number[];
   id: number;
 };

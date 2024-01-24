@@ -12,28 +12,30 @@ const InGameContext = createContext<InGameContextType>({} as InGameContextType);
 
 export const InGameContextProvider = ({
   children,
-  leagueId,
-}: {
+}: // leagueId,
+{
   children: React.ReactNode;
-  leagueId: string;
+  // leagueId: string;
 }) => {
   const [players, setPlayers] = useState<PlayerDataType[] | null>(null);
   const [fetchedHistory, setFetchedHistory] = useState<{
     [season: number]: number[];
   } | null>(null);
 
-  const getInitialFetchLeaguePlayers = async () => {
-    const { data, season, page } = (await initialFetchLeaguePlayers(
-      leagueId
-    )) as FetchLeaguePlayersResponseType;
+  // const getInitialFetchLeaguePlayers = async () => {
+  //   const { data, season, page } = (await initialFetchLeaguePlayers(
+  //     leagueId
+  //   )) as FetchLeaguePlayersResponseType;
+  //   console.log(data, season);
 
-    setPlayers(data);
-    setFetchedHistory({ [season]: [page] });
-  };
+  //   setPlayers(data);
+  //   setFetchedHistory({ [season]: [page] });
+  // };
 
-  useEffect(() => {
-    getInitialFetchLeaguePlayers();
-  }, []);
+  // useEffect(() => {
+  //   return;
+  //   getInitialFetchLeaguePlayers();
+  // }, []);
 
   return (
     <InGameContext.Provider value={{ players }}>
@@ -42,6 +44,6 @@ export const InGameContextProvider = ({
   );
 };
 
-export const InGameData = () => {
+export const useInGameData = () => {
   return useContext(InGameContext);
 };

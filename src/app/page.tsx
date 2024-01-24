@@ -1,9 +1,7 @@
 "use client";
 
 import LeagueSelectionCard from "@/components/LeagueSelectionCard";
-import { AVAILABLE_LEAGUES_TO_START } from "@/constants/home";
-import Image from "next/image";
-import Link from "next/link";
+import { AVAILABLE_LEAGUES } from "@/constants/home";
 import React from "react";
 
 type Props = {};
@@ -31,7 +29,7 @@ const Home = (props: Props) => {
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-        {AVAILABLE_LEAGUES_TO_START.map((props) => (
+        {AVAILABLE_LEAGUES.map((props) => (
           <LeagueSelectionCard key={props.id} {...props} />
         ))}
       </div>

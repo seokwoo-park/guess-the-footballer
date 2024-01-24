@@ -1,4 +1,4 @@
-import { AVAILABLE_LEAGUES_TO_START } from "@/constants/home";
+import { AVAILABLE_LEAGUES } from "@/constants/home";
 import { getRandomNumber } from "@/utils/numbers";
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
@@ -20,8 +20,8 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ status: 400, message: "Page is required" });
   }
 
-  const leagueToStart = AVAILABLE_LEAGUES_TO_START.find(
-    ({ id, availableSeason }) =>
+  const leagueToStart = AVAILABLE_LEAGUES.find(
+    ({ id, availableSeasons: availableSeason }) =>
       id === +leagueId && availableSeason.includes(+season)
   );
 
