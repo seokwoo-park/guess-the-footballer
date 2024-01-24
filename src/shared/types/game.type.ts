@@ -1,4 +1,4 @@
-export type GameStatusType = "pending" | "start" | "finish";
+export type GameStatusType = "PENDING" | "PLAYING" | "GAME-OVER";
 
 export type PlayerStaticType = {
   team: {
@@ -43,6 +43,10 @@ export type PlayerDataType = {
 
 export type FetchLeaguePlayersResponseType = {
   data: PlayerDataType[];
-  season: number;
-  page: number;
+  paging: {
+    current: number;
+    total: number;
+  };
+  status: number;
+  message?: string;
 };

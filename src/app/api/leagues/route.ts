@@ -1,5 +1,4 @@
 import { AVAILABLE_LEAGUES } from "@/constants/home";
-import { getRandomNumber } from "@/utils/numbers";
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 
@@ -20,15 +19,15 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ status: 400, message: "Page is required" });
   }
 
-  const leagueToStart = AVAILABLE_LEAGUES.find(
+  const isValidToFetch = AVAILABLE_LEAGUES.some(
     ({ id, availableSeasons: availableSeason }) =>
       id === +leagueId && availableSeason.includes(+season)
   );
 
-  if (!leagueToStart) {
+  if (!isValidToFetch) {
     return NextResponse.json({
       status: 400,
-      message: "Invalid league ID",
+      message: "Invalid league ID or Season",
     });
   }
 
@@ -41,8 +40,6 @@ export async function GET(request: NextRequest) {
       league: leagueId,
       page,
       season,
-      // page: randomPageNumber,
-      // season: randomSeason,
     },
     headers: {
       "X-RapidAPI-Key": process.env.FOOTBALL_API_KEY,
@@ -51,10 +48,32 @@ export async function GET(request: NextRequest) {
   };
 
   try {
-    const res = await axios.request(options);
-    return NextResponse.json({ status: 201, data: res.data.response });
+    const { data } = await axios.request(options);
+
+    if (!data?.results)
+      return NextResponse.json({
+        status: 400,
+        // Error on API provider side
+        message: "Sorry, error on the server. please try later again.",
+      });
+
+    if (!!data?.message?.length)
+      return NextResponse.json({
+        status: 400,
+        // Failed to fetch API error
+        message: "Sorry, error on the server. please try later again.",
+      });
+
+    return NextResponse.json({
+      status: 201,
+      data: data.response,
+      paging: data.paging,
+    });
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ status: 500 });
+    return NextResponse.json({
+      status: 400,
+      message: "Sorry, something went wrong. please try again later.",
+    });
   }
 }
