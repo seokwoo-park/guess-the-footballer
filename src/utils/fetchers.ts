@@ -12,5 +12,7 @@ export const fetchLeaguePlayers = async (
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/leagues?leagueId=${leagueId}&season=${season}&page=${page}`
   );
 
+  console.log("***", data);
+
   return data;
 };

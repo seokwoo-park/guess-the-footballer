@@ -1,6 +1,6 @@
-import { AVAILABLE_LEAGUES } from "@/constants/home";
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
+import { AVAILABLE_LEAGUES } from "@/constants/home";
 
 export async function GET(request: NextRequest) {
   const url = new URL(request.url);

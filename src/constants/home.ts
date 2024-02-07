@@ -6,6 +6,24 @@ import serieA_logo_image from "@/assets/serieA_logo.jpg";
 import mls_logo_image from "@/assets/mls_logo.jpg";
 import { AvailableLeaguesType } from "@/shared/types";
 
+export const GAME_SKILL_CATEGORIES = [
+  {
+    label: "Scorer",
+    value: "scorer",
+    difficulty: "Easy",
+  },
+  {
+    label: "Assist",
+    value: "assist",
+    difficulty: "Easy - Medium",
+  },
+  {
+    label: "Dribbler",
+    value: "dribbler",
+    difficulty: "Medium",
+  },
+];
+
 export const AVAILABLE_LEAGUES: AvailableLeaguesType[] = [
   {
     country: "England",

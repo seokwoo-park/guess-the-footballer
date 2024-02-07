@@ -1,44 +1,39 @@
 "use client";
 
-import { FetchLeaguePlayersResponseType, PlayerDataType } from "@/shared/types";
-import { initialFetchLeaguePlayers } from "@/utils/fetchers";
+import { GameStatusType, PlayerDataType } from "@/shared/types";
 import { createContext, useContext, useEffect, useState } from "react";
 
 export interface InGameContextType {
-  players: PlayerDataType[] | null;
+  status: GameStatusType;
+  statusHandler: (newGameStatus: GameStatusType) => void;
+  resetGame: () => void;
+  // players: PlayerDataType[] | null;
 }
 
 const InGameContext = createContext<InGameContextType>({} as InGameContextType);
 
 export const InGameContextProvider = ({
   children,
-}: // leagueId,
-{
+}: {
   children: React.ReactNode;
-  // leagueId: string;
 }) => {
-  const [players, setPlayers] = useState<PlayerDataType[] | null>(null);
-  const [fetchedHistory, setFetchedHistory] = useState<{
-    [season: number]: number[];
-  } | null>(null);
+  // const [players, setPlayers] = useState<PlayerDataType[] | null>(null);
+  const [status, setStatus] = useState<GameStatusType>("PENDING");
 
-  // const getInitialFetchLeaguePlayers = async () => {
-  //   const { data, season, page } = (await initialFetchLeaguePlayers(
-  //     leagueId
-  //   )) as FetchLeaguePlayersResponseType;
-  //   console.log(data, season);
+  const statusHandler = (newGameStatus: GameStatusType) => {
+    if (status === "PENDING" && newGameStatus !== "PLAYING") return;
+    // if (status === "PLAYING" && newGameStatus !== "GAME-OVER") return;
+    // if (status === "GAME-OVER" && newGameStatus !== "PENDING") return;
 
-  //   setPlayers(data);
-  //   setFetchedHistory({ [season]: [page] });
-  // };
+    setStatus(newGameStatus);
+  };
 
-  // useEffect(() => {
-  //   return;
-  //   getInitialFetchLeaguePlayers();
-  // }, []);
+  const resetGame = () => {
+    setStatus("PENDING");
+  };
 
   return (
-    <InGameContext.Provider value={{ players }}>
+    <InGameContext.Provider value={{ status, statusHandler, resetGame }}>
       {children}
     </InGameContext.Provider>
   );

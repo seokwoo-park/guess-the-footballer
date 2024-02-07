@@ -7,11 +7,12 @@ type Props = {
 };
 
 const PlayingGame = async ({ leagueId, season }: Props) => {
-  const response = await fetchLeaguePlayers(leagueId, season, "1");
+  console.log("re-rendered");
+  // const response = await fetchLeaguePlayers(leagueId, season, "1");
 
-  if (response?.status !== 201) {
-    return <h1> Error, {response?.message} </h1>;
-  }
+  // if (response?.status !== 201) {
+  //   return <h1> Error, {response?.message} </h1>;
+  // }
 
   return <div>Playing Game</div>;
 };

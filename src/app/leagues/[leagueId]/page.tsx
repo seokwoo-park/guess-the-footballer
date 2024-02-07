@@ -1,39 +1,27 @@
-import React from "react";
-import { AVAILABLE_LEAGUES } from "@/constants/home";
-import { notFound } from "next/navigation";
-import Link from "next/link";
+"use client";
 
-export function generateStaticParams() {
-  return AVAILABLE_LEAGUES.map((league) => {
-    return { leagueId: league.id.toString() };
-  });
-}
+import React, { useEffect } from "react";
+import ChallengeCategory from "./views/ChallengeCategory";
+import { useInGameData } from "@/context/InGameContext";
 
-export const dynamicParams = false;
+const OutOfGame = ({ params }: { params: { leagueId: string } }) => {
+  const { status, statusHandler } = useInGameData();
 
-const SelectSeason = ({ params }: { params: { leagueId: string } }) => {
-  const leagueData = AVAILABLE_LEAGUES.find(
-    ({ id }) => id === +params.leagueId
-  );
+  useEffect(() => {
+    if (status === "PLAYING") {
+      statusHandler("PENDING");
+    }
+  }, [status]);
 
-  if (!leagueData) notFound();
+  console.log(status);
 
-  return (
-    <div className="">
-      <h6>Select Season</h6>
-      <div className="flex flex-wrap gap-4">
-        {leagueData.availableSeasons.map((season) => (
-          <Link
-            key={season}
-            className="border border-white py-4 px-8 rounded-lg"
-            href={`/leagues/${params.leagueId}/seasons?season=${season}`}
-          >
-            {season}
-          </Link>
-        ))}
-      </div>
-    </div>
-  );
+  if (status === "PENDING") {
+    return <ChallengeCategory leagueId={params.leagueId} />;
+  }
+
+  if (status === "GAME-OVER") {
+    return <h1>GAME OVER</h1>;
+  }
 };
 
-export default SelectSeason;
+export default OutOfGame;
