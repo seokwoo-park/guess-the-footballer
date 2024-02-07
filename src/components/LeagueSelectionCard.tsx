@@ -12,7 +12,7 @@ const LeagueSelectionCard = ({
   return (
     <Link
       key={league}
-      href={`/leagues/${id}`}
+      href={`/in-game/${id}`}
       className="max-w-sm bg-gray-100 border border-gray-200 rounded-lg shadow-lg shadow-gray-300 dark:shadow-gray-600 dark:bg-gray-800 dark:border-gray-700 hover:scale-105 hover:shadow-red-800 duration-300"
     >
       <Image src={image} alt={league} className="rounded-t-lg" />

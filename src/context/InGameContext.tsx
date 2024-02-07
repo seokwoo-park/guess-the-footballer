@@ -21,7 +21,7 @@ export const InGameContextProvider = ({
   const [status, setStatus] = useState<GameStatusType>("PENDING");
 
   const statusHandler = (newGameStatus: GameStatusType) => {
-    if (status === "PENDING" && newGameStatus !== "PLAYING") return;
+    // if (status === "PENDING" && newGameStatus !== "PLAYING") return;
     // if (status === "PLAYING" && newGameStatus !== "GAME-OVER") return;
     // if (status === "GAME-OVER" && newGameStatus !== "PENDING") return;
 

@@ -6,7 +6,7 @@ import serieA_logo_image from "@/assets/serieA_logo.jpg";
 import mls_logo_image from "@/assets/mls_logo.jpg";
 import { AvailableLeaguesType } from "@/shared/types";
 
-export const GAME_SKILL_CATEGORIES = [
+export const AVAILABLE_CHALLENGES = [
   {
     label: "Scorer",
     value: "scorer",

@@ -1,13 +1,15 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { useInGameData } from "@/context/InGameContext";
 import React, { useEffect } from "react";
+import GameOver from "./views/GameOver";
+import InGame from "./views/InGame";
 
 type Props = {};
 
-const InGame = (props: Props) => {
-  const { statusHandler } = useInGameData();
+const Playing = (props: Props) => {
+  const { status } = useInGameData();
+
   useEffect(() => {
     const handleOnBeforeUnload = (event: BeforeUnloadEvent) => {
       event.preventDefault();
@@ -17,12 +19,11 @@ const InGame = (props: Props) => {
     window.addEventListener("beforeunload", handleOnBeforeUnload);
   }, []);
 
-  console.log("here");
-  return (
-    <div>
-      <Button onClick={() => statusHandler("GAME-OVER")}>here</Button>
-    </div>
-  );
+  if (status === "GAME-OVER") {
+    return <GameOver />;
+  }
+
+  return <InGame />;
 };
 
-export default InGame;
+export default Playing;
